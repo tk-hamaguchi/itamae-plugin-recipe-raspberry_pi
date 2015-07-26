@@ -1,6 +1,8 @@
 Itamae::Plugin::Recipe::RaspberryPi
 ========
 
+[![Gem Version](https://badge.fury.io/rb/itamae-plugin-recipe-raspberry_pi.svg)](http://badge.fury.io/rb/itamae-plugin-recipe-raspberry_pi)
+
 Itamae plugin for Setup RaspberryPi.
 
 Installation
@@ -20,11 +22,14 @@ Or install it yourself as:
 
     $ gem install itamae-plugin-recipe-raspberry_pi
 
-## Usage
+Usage
+--------
 
 Include your recipe.
 
 ```ruby
 include_recipe 'raspberry_pi'
 ```
+
+
 
