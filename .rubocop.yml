@@ -1,0 +1,12 @@
+Metrics/LineLength:
+  Max: 100
+
+Style/Documentation:
+  Enabled: false
+
+AsciiComments:
+  Enabled: false
+
+Encoding:
+  Enabled: false
+

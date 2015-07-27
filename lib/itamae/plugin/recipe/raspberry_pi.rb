@@ -1,3 +1,5 @@
+require 'ext/itamae'
+
 execute 'update package list' do
   user 'root'
   command 'apt-get update -y'
@@ -74,4 +76,32 @@ end
 execute 'reboot' do
   user 'root'
   command 'reboot'
+end
+
+local_ruby_block 'waiting reboot' do
+  block do
+    if (node.backend.class == Itamae::Backend::Ssh)
+      flag = false
+      loop do
+        ping = "ping -c 1 -t 1 #{node.backend.host}"
+        status = `#{ping} 2>&1 >/dev/null && echo $?`.strip
+        if status == '' && flag
+        elsif status == ''
+          Itamae::Logger.info 'rebooting...'
+          flag = true
+        elsif status == '0' && flag
+          break
+        end
+        sleep 1
+      end
+      Itamae::Logger.info 'rebooted.'
+      Itamae::Logger.info 'reconnect ssh session..'
+      node.backend.clear
+    end
+  end
+end
+
+directory '/tmp/itamae_tmp' do
+  mode '777'
+  action :create
 end
